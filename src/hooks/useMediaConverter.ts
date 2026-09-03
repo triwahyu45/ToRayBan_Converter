@@ -264,11 +264,12 @@ export function useMediaConverter(): UseMediaConverterReturn {
         // ==========================================
         setStatus('cropping');
         setProgressPercent(20);
-        addLog('info', 'Starting Image synthesis to Ray-Ban Meta 1376x1840 format...');
+        addLog('info', 'Starting Image synthesis to Ray-Ban Meta 3024x4032 12MP format...');
 
         const canvas = document.createElement('canvas');
-        canvas.width = 1376;
-        canvas.height = 1840;
+        // Native Ray-Ban Meta 12MP photo resolution (3:4 ratio)
+        canvas.width = 3024;
+        canvas.height = 4032;
         const ctx = canvas.getContext('2d');
         if (!ctx) throw new Error('Failed to initialize 2D canvas context');
 
@@ -283,15 +284,15 @@ export function useMediaConverter(): UseMediaConverterReturn {
           // Draw blurred background
           ctx.save();
           ctx.filter = 'blur(40px) brightness(0.65)';
-          ctx.drawImage(img, -50, -50, 1476, 1940);
+          ctx.drawImage(img, -100, -100, 3224, 4232);
           ctx.restore();
 
           // Draw fitted foreground
-          const scale = Math.min(1376 / img.naturalWidth, 1840 / img.naturalHeight);
+          const scale = Math.min(3024 / img.naturalWidth, 4032 / img.naturalHeight);
           const fitW = img.naturalWidth * scale;
           const fitH = img.naturalHeight * scale;
-          const offX = (1376 - fitW) / 2;
-          const offY = (1840 - fitH) / 2;
+          const offX = (3024 - fitW) / 2;
+          const offY = (4032 - fitH) / 2;
 
           ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, offX, offY, fitW, fitH);
         } else {
@@ -304,14 +305,14 @@ export function useMediaConverter(): UseMediaConverterReturn {
             computedCrop.height,
             0,
             0,
-            1376,
-            1840
+            3024,
+            4032
           );
         }
 
         setStatus('synthesizing');
         setProgressPercent(60);
-        addLog('exif', 'Injecting authentic Luxottica & Ray-Ban Meta Smart Glasses EXIF...');
+        addLog('exif', 'Injecting authentic Meta AI & Ray-Ban Meta Smart Glasses 2 EXIF...');
 
         const jpegBlob = await new Promise<Blob>((resolve) => {
           canvas.toBlob((blob) => resolve(blob!), 'image/jpeg', 0.95);
@@ -319,13 +320,13 @@ export function useMediaConverter(): UseMediaConverterReturn {
 
         const rawJpegBytes = await fileToUint8Array(jpegBlob);
         const injectedBytes = injectRayBanExifBuffer(rawJpegBytes, {
-          make: 'Luxottica',
-          model: 'Ray-Ban Meta Smart Glasses',
+          make: 'Meta AI',
+          model: 'Ray-Ban Meta Smart Glasses 2',
           software: 'Meta View',
           lensMake: 'Luxottica',
-          lensModel: 'Ray-Ban Meta Smart Glasses',
-          width: 1376,
-          height: 1840,
+          lensModel: 'Ray-Ban Meta Smart Glasses 2',
+          width: 3024,
+          height: 4032,
         });
 
         // Extract metadata for diff inspector
@@ -343,8 +344,8 @@ export function useMediaConverter(): UseMediaConverterReturn {
           filename: finalFilename,
           format: 'jpeg',
           size: finalBlob.size,
-          width: 1376,
-          height: 1840,
+          width: 3024,
+          height: 4032,
         });
 
         setStatus('completed');

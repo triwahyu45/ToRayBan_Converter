@@ -41,13 +41,13 @@ export function formatExifDate(d: Date = new Date()): string {
  * Builds a binary TIFF APP1 payload for Ray-Ban Meta Smart Glasses.
  */
 export function buildRayBanTiffPayload(options: RayBanExifOptions = {}): Uint8Array {
-  const make = options.make ?? 'Luxottica';
-  const model = options.model ?? 'Ray-Ban Meta Smart Glasses';
+  const make = options.make ?? 'Meta AI';
+  const model = options.model ?? 'Ray-Ban Meta Smart Glasses 2';
   const software = options.software ?? 'Meta View';
   const lensMake = options.lensMake ?? 'Luxottica';
-  const lensModel = options.lensModel ?? 'Ray-Ban Meta Smart Glasses';
-  const width = options.width ?? 1376;
-  const height = options.height ?? 1840;
+  const lensModel = options.lensModel ?? 'Ray-Ban Meta Smart Glasses 2';
+  const width = options.width ?? 3024;
+  const height = options.height ?? 4032;
   const iso = options.iso ?? 100;
   const fNumber = Array.isArray(options.fNumber) ? options.fNumber : [22, 10];
   const focalLength = Array.isArray(options.focalLength) ? options.focalLength : [22, 10];
