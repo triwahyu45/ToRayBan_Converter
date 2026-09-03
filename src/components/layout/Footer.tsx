@@ -50,6 +50,15 @@ export const Footer: React.FC = () => {
 
           <div className="flex items-center gap-4">
             <a
+              href="https://triwahyu45.github.io/ToRayBan_Converter/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 transition-colors focus:outline-none focus:underline font-medium"
+            >
+              <span>🌐 Live Web</span>
+            </a>
+            <span className="text-slate-600">&bull;</span>
+            <a
               href="https://github.com/triwahyu45/ToRayBan_Converter"
               target="_blank"
               rel="noopener noreferrer"

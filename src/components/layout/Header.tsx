@@ -72,6 +72,17 @@ export const Header: React.FC<HeaderProps> = ({
             </Badge>
           </div>
 
+          {/* Live Web Link */}
+          <a
+            href="https://triwahyu45.github.io/ToRayBan_Converter/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono font-semibold text-cyan-400 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-lg transition-colors"
+            title="Live Web Deployment"
+          >
+            <span>🌐 Live Web</span>
+          </a>
+
           {/* Transfer Guide Button */}
           {onOpenTransferGuide && (
             <Button
